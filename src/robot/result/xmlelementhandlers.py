@@ -123,10 +123,9 @@ class KeywordHandler(_Handler):
                                        libname=elem.get('library', ''),
                                        type=type_)
         elif type_ == 'teardown':
-            return result.teardown.config(
-                kwname=elem.get('name', ''),
-                libname=elem.get('library', ''),
-                type=type_)
+            return result.teardown.config(kwname=elem.get('name', ''),
+                                          libname=elem.get('library', ''),
+                                          type=type_)
         return result.body.create(kwname=elem.get('name', ''),
                                   libname=elem.get('library', ''),
                                   type=elem.get('type', 'kw'))

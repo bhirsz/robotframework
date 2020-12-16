@@ -44,9 +44,9 @@ class TestCase(ModelObject):
                                            type=Keyword.TEARDOWN_TYPE)
 
     @setter
-    def body(self, keywords):
+    def body(self, body):
         """Test case body as a :class:`~.Body` object."""
-        return Body(self.keyword_class, self, keywords)
+        return Body(self.keyword_class, self, body)
 
     @setter
     def tags(self, tags):

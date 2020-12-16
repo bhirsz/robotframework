@@ -87,9 +87,9 @@ class For(Keyword):
         self.error = error
 
     @setter
-    def body(self, keywords):
+    def body(self, body):
         """Child keywords as a :class:`~.Body` object."""
-        return Body(Keyword, self, keywords)
+        return Body(Keyword, self, body)
 
     @setter
     def keywords(self, keywords):
@@ -129,9 +129,9 @@ class If(Keyword):
         self.error = error
 
     @setter
-    def body(self, keywords):
+    def body(self, body):
         """Child keywords as a :class:`~.Body` object."""
-        return Body(Keyword, self, keywords)
+        return Body(Keyword, self, body)
 
     @property
     def condition(self):
@@ -362,9 +362,9 @@ class UserKeyword(object):
         self._teardown = None
 
     @setter
-    def body(self, keywords):
+    def body(self, body):
         """Child keywords as a :class:`~.Body` object."""
-        return Body(Keyword, self, keywords)
+        return Body(Keyword, self, body)
 
     @setter
     def keywords(self, keywords):

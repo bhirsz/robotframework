@@ -284,8 +284,6 @@ class TestBuildingFromXmlStringAndHandlingMissingInformation(unittest.TestCase):
         assert_equal(suite.doc, '')
         assert_equal(suite.source, None)
         assert_equal(suite.metadata, {})
-        # TODO: should suite have an empty body?
-        # assert_equal(list(suite.body), [])
         assert_equal(suite.starttime, None)
         assert_equal(suite.endtime, None)
         assert_equal(suite.elapsedtime, 0)

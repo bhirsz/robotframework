@@ -196,12 +196,9 @@ class Body(ItemList):
     def __init__(self, keyword_class=Keyword, parent=None, keywords=None):
         ItemList.__init__(self, keyword_class, {'parent': parent}, keywords)
 
-    @property
-    def all(self):
-        """Iterates over all keywords, including setup and teardown."""
-        return self
-
     def __setitem__(self, index, item):
         old = self[index]
         ItemList.__setitem__(self, index, item)
         self[index]._sort_key = old._sort_key
+
+    # TODO: add `create_keyword`, `create_for` and `create_if`, deprecate `create`

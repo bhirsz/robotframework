@@ -93,9 +93,9 @@ class Keyword(model.Keyword):
         self.source = source
 
     @setter
-    def body(self, keywords):
-        """Keyword body as a :class:`~.Body` object."""
-        return Body(self.keyword_class or self.__class__, self, keywords)
+    def body(self, body):
+        """Child keywords as a :class:`~.Body` object."""
+        return Body(self.keyword_class or self.__class__, self, body)
 
     @setter
     def keywords(self, keywords):
