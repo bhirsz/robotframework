@@ -75,7 +75,6 @@ class Keyword(model.Keyword):
         model.Keyword.__init__(self, '', doc, args, assign, tags, timeout, type, parent)
         self.messages = None
         self.body = None
-        self.keywords = None
         #: Name of the keyword without library or resource name.
         self.kwname = kwname or ''
         #: Name of the library or resource containing this keyword.
@@ -97,10 +96,20 @@ class Keyword(model.Keyword):
         """Child keywords as a :class:`~.Body` object."""
         return Body(self.keyword_class or self.__class__, self, body)
 
-    @setter
+    @property
+    def keywords(self):
+        """Deprecated since Robot Framework 4.0
+
+        Use :attr:`body`, :attr:`setup` or :attr:`teardown` instead.
+        """
+        kws = list(self.body) + [self.teardown] if self.teardown else []
+        return Keywords(self.keyword_class, self, kws)
+
+    @keywords.setter
     def keywords(self, keywords):
-        """Child keywords as a :class:`~.Keywords` object."""
-        return Keywords(self.keyword_class or self.__class__, self, keywords)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. \
+               Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     @setter
     def messages(self, messages):

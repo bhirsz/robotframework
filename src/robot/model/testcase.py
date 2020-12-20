@@ -38,7 +38,6 @@ class TestCase(ModelObject):
         self.timeout = timeout  #: Test case timeout.
         self.tags = tags
         self.body = None
-        self.keywords = None
         self.setup = self.keyword_class(parent=self, type=Keyword.SETUP_TYPE)
         self.teardown = self.keyword_class(parent=self,
                                            type=Keyword.TEARDOWN_TYPE)
@@ -61,13 +60,20 @@ class TestCase(ModelObject):
     def teardown(self, teardown):
         return create_fixture(teardown, self, Keyword.TEARDOWN_TYPE)
 
-    @setter
-    def keywords(self, keywords):
-        """Keywords as a :class:`~.Keywords` object.
+    @property
+    def keywords(self):
+        """Deprecated since Robot Framework 4.0
 
-        Contains also possible setup and teardown keywords.
+        Use :attr:`body`, :attr:`setup` or :attr:`teardown` instead.
         """
-        return Keywords(self.keyword_class, self, keywords)
+        kws = [kw for kw in [self.setup] + list(self.body) + [self.teardown] if kw]
+        return Keywords(self.keyword_class, self, kws)
+
+    @keywords.setter
+    def keywords(self, keywords):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. \
+               Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     @property
     def id(self):

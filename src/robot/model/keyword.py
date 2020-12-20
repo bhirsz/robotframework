@@ -13,6 +13,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+import warnings
+
 from robot.utils import setter, py3to2
 
 from .fixture import create_fixture
@@ -125,6 +127,9 @@ class Keywords(ItemList):
     __slots__ = []
 
     def __init__(self, keyword_class=Keyword, parent=None, keywords=None):
+        warnings.warn(
+            '`keywords` property has been deprecated in Robot Framework 4.0',
+            UserWarning)
         ItemList.__init__(self, keyword_class, {'parent': parent}, keywords)
 
     @property

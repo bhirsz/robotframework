@@ -82,7 +82,6 @@ class For(Keyword):
         Keyword.__init__(self, assign=variables, args=values, type=Keyword.FOR_LOOP_TYPE,
                          lineno=lineno, parent=parent)
         self.body = None
-        self.keywords = None
         self.flavor = flavor
         self.error = error
 
@@ -91,10 +90,19 @@ class For(Keyword):
         """Child keywords as a :class:`~.Body` object."""
         return Body(Keyword, self, body)
 
-    @setter
+    @property
+    def keywords(self):
+        """Deprecated since Robot Framework 4.0
+
+        Use :attr:`body`, :attr:`setup` or :attr:`teardown` instead.
+        """
+        return Keywords(self.keyword_class, self, self.body)
+
+    @keywords.setter
     def keywords(self, keywords):
-        """Child keywords as a :class:`~.Keywords` object."""
-        return Keywords(Keyword, self, keywords)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. \
+               Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     @property
     def variables(self):
@@ -356,7 +364,6 @@ class UserKeyword(object):
         self.return_ = return_ or ()
         self.timeout = timeout
         self.body = []
-        self.keywords = None
         self.lineno = lineno
         self.parent = parent
         self._teardown = None
@@ -366,10 +373,20 @@ class UserKeyword(object):
         """Child keywords as a :class:`~.Body` object."""
         return Body(Keyword, self, body)
 
-    @setter
+    @property
+    def keywords(self):
+        """Deprecated since Robot Framework 4.0
+
+        Use :attr:`body`, :attr:`setup` or :attr:`teardown` instead.
+        """
+        kws = list(self.body) + [self.teardown] if self.teardown else []
+        return Keywords(self.keyword_class, self, kws)
+
+    @keywords.setter
     def keywords(self, keywords):
-        """Child keywords as a :class:`~.Keywords` object."""
-        return model.Keywords(Keyword, self, keywords)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. \
+               Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     @property
     def teardown(self):
