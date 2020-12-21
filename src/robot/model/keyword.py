@@ -142,16 +142,14 @@ class Keywords(ItemList):
 
     @setup.setter
     def setup(self, kw):
-        if kw is not None and kw.type != 'setup':
-            raise TypeError("Setup keyword type must be 'setup', "
-                            "got '%s'." % kw.type)
-        if self.setup is not None:
-            self.pop(0)
-        if kw is not None:
-            self.insert(0, kw)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     def create_setup(self, *args, **kwargs):
-        self.setup = self._item_class(*args, type='setup', **kwargs)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     @property
     def teardown(self):
@@ -163,16 +161,14 @@ class Keywords(ItemList):
 
     @teardown.setter
     def teardown(self, kw):
-        if kw is not None and kw.type != 'teardown':
-            raise TypeError("Teardown keyword type must be 'teardown', "
-                            "got '%s'." % kw.type)
-        if self.teardown is not None:
-            self.pop()
-        if kw is not None:
-            self.append(kw)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     def create_teardown(self, *args, **kwargs):
-        self.teardown = self._item_class(*args, type='teardown', **kwargs)
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
     @property
     def all(self):
@@ -186,9 +182,59 @@ class Keywords(ItemList):
         return Keywords(self._item_class, self._common_attrs['parent'], kws)
 
     def __setitem__(self, index, item):
-        old = self[index]
-        ItemList.__setitem__(self, index, item)
-        self[index]._sort_key = old._sort_key
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def create(self, *args, **kwargs):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def append(self, item):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def extend(self, items):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def insert(self, index, item):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def pop(self, *index):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def remove(self, item):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def clear(self):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def __delitem__(self, index):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def sort(self):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
+
+    def reverse(self):
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
+        raise AttributeError(msg)
 
 
 class Body(ItemList):

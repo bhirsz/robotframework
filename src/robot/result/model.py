@@ -107,8 +107,8 @@ class Keyword(model.Keyword):
 
     @keywords.setter
     def keywords(self, keywords):
-        msg = ('The `keywords` property has been deprecated in RF 4.0. \
-               Use `body`, `setup` or `teardown` instead.')
+        msg = ('The `keywords` property has been deprecated in RF 4.0. ' \
+               'Use `body`, `setup` or `teardown` instead.')
         raise AttributeError(msg)
 
     @setter
